@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tripsy-SignUp Page</title>
+       <!-- jquery plugin -->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+   
+   
+
+    <!-- bootstrap 5.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+   
+        <!-- gfonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Open+Sans+Condensed:wght@300&family=Montserrat:wght@800&family=Charm:wght@700&family=Roboto:wght@100;300&family=Sacramento&family=Ubuntu:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- fontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- external css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/layout.css' %}">
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body onload="sliding();">
+    
+    <div class="navbarHolder">
+        <!-- <div class="navbar-brand">
+            <h1>tripsy</h1>
+        </div> -->
+
+    </div>
+    <div class="secondNavbarHolder">
+
+    </div>
+    
+        <div class="container" id="animating">
+            <!-- <div class="message">
+    
+            </div> -->
+            <form action="/signup/" method="post" onsubmit="return checkInputs()" name="myForm">  {% csrf_token %}
+           
+            <div class="row col-lg-8">
+                <h6>Signup with </h6>
+                <div class="btn btn-primary col-lg-3 google">Google</div>
+                <div class="btn btn-dark col-lg-3 facebook">Facebook</div>
+            </div>
+            <hr>
+
+            <div class="fl-row">
+                <div class="col-lg-6">
+                    <h6><label for="fname">First Name</label></h6>
+                    <input type="text" name="fname" class="fname checkInput" placeholder="John" required>
+                </div>
+                
+                <div class="col-lg-6">
+                   <h6> <label for="lname">Last Name</label></h6>
+                    <input type="text" name="lname" class="lname checkInput" placeholder="Doe" required>
+                </div>
+
+            </div>
+            <div class="message nameMsg">
+    
+            </div>
+            <div>
+                <h6><label for="email">Email</label></h6>
+                <input type="email" name="email" class="email col-sm-8"  placeholder="johndoe@gmail.com" required>
+            </div>
+            <div>
+                <h6><label for="uname">UserName: </label></h6>
+                <input type="text" name="uname" class="email col-sm-8"  placeholder="johndoe" required>
+            </div>
+            <div class="message emailMsg">
+    
+            </div>
+            <div class="fl-row">
+                <div class="col-lg-6">
+                    <h6><label for="pwd">Password</label></h6>
+                    <input type="password" name="pwd" class="pwd checkInput" placeholder="Abcd@1234" required>
+                </div>
+                <div class="col-lg-6">
+                    <h6><label for="confirmPwd">Confirm Password</label></h6>
+                    <input type="password" name="pwd1" class="confirmPwd checkInput" placeholder="Your Password" required>
+                </div>
+            </div>
+            <div class="message pwdMsg">
+    
+            </div>
+            <div class="row">
+                <div class="col-lg-2 mb-1 showCaptchaDiv">
+                  <input type="text" name="" class="showCaptchaCode" id="" readonly>
+                </div>
+                <button type="button" onclick="createCaptcha();" class="col-1 captcha-btn"><i class="fa fa-refresh"></i></button>
+                <div class="col-lg-7">
+                    <input type="text" class="Captcha checkInput" placeholder="Enter Captcha Code here" required>
+                </div>
+            </div>
+            <div class="message captchaMsg">
+    
+            </div>
+            <div>
+                <input type="checkbox" name="checkIfRobot" class="checkInput" id="checkRobo" required> I am not a robot.
+            </div>
+            <div>
+                <input type="checkbox" name="checkPolicy" class="checkInput" id="checkTnC" required> I agree to proposed <a
+                    href="/conditions"> Terms & Conditions </a>and have read <a href="/conditions">Privacy
+                    Policy</a.
+            </div>
+            <div class="message tickMsg">
+    
+            </div>
+
+                    <div>
+                        <input type="submit" class="col-3 continue" value="Continue">
+                    </div>
+
+                    <div style="text-align: center;">
+                        <hr>
+                        <h6>T&C Applied</h6>
+                    </div>
+                </form>
+            </div>
+   
+    <hr>
+        </div>
+    <div class="footerHolder">
+
+    </div>
+
+    <!-- 
+    <div class="col-lg-2">
+        <button class="btn info-btn btn-primary">Info</button>
+    <p class="info-desc">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente modi itaque dicta!
+    </p>
+    </div> -->
+
+
+  <!-- external js -->
+    <script src="{% static '/js/signup.js' %}"></script>
+</body>
+
+</html>
+{% endblock body %}

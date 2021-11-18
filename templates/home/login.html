@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- bootstrap 5.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- gfonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Open+Sans+Condensed:wght@300&family=Montserrat:wght@800&family=Charm:wght@700&family=Roboto:wght@100;300&family=Sacramento&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+
+
+    <!-- external css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/layout.css' %}">
+
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+    </style>
+
+</head>
+
+<body onload="sliding();">
+    <div class="navbar-brand animatingNavBrand">
+        <h1>tripsy</h1>
+    </div>
+  
+
+    <form action="/handlelogin/" method="post">  {% csrf_token %} 
+        <div class="container-fluid" id="animatingLogin">
+            <div class="row">
+                <h5>Login via </h5>
+                <div class="btn btn-primary col-lg-3 google">Google</div>
+                <div class="btn btn-dark col-lg-3 facebook">Facebook</div>
+            </div>
+            <hr>
+
+            <div>
+                <label for="uname">UserName: </label>
+                <input type="text" class="email input-fields" placeholder="johndoe@gmail.com" name="loginuser">
+            </div>
+            <div>
+                <label for="pwd">Password: </label>
+                <input type="password" class="pwd input-fields" placeholder="Abcd@1234" name="loginpass">
+
+            </div>
+            <p>Don't have an account?<a href="#">Create one now</a>
+                <a href="#" class="fp col-lg-3 col-md-1"> Forgot Password</a></p>
+
+            <div>
+                <input type="checkbox" name="checkIfRobot" id="checkRobo" required> I am not a robot.
+            </div>
+
+            <button type="submit" class="login" value="Login">Login</button>
+
+            <div style="text-align: center;">
+                <hr>
+                <h6><a href="/conditions"> T&C Applied </a></h6>
+            </div>
+        </div>
+    </form>
+
+    <!-- jquery plugin -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- external js -->
+    <script src="{% static '/js/login.js' %}"></script>
+</body>
+
+</html>
+{% endblock body %}

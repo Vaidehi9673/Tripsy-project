@@ -1,0 +1,508 @@
+{% extends 'base.html' %}
+{% block body %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Album example · Bootstrap v5.0</title>
+
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/"> -->
+
+
+    <!-- bootstrap 5.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- fontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <meta name="theme-color" content="#7952b3">
+
+    <!-- external css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/deals.css' %}">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <main>
+    {% if not user.is_authenticated %}
+       <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
+  <div>
+    Please Login to check more information about packages
+  </div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+        <section class="py-7 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">Best tours and packages just for you!🛩 </h1>
+                    <p class="lead text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                    <p>
+                        <a href="#" class="btn btn-warning my-2"> My Bookmarks</a>
+                        <a href="/" class="btn btn-primary my-2">Back to home page</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.0.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.0.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.0.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.0.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.0.famous}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.0.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.0.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.1.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.1.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.1.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.1.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.1.famous}} </p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.1.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.1.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.2.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.2.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.2.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.2.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.2.famous}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.2.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.2.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.3.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.3.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.3.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.3.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.3.famous}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.3.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.3.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.4.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.4.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.4.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.4.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.4.famous}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.4.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.4.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.5.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.5.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.5.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.5.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.5.famous}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.5.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.5.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.6.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.6.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.6.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.6.duration}} </p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.6.famous}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.6.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.6.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.7.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.7.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.7.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.7.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.7.famous}} </p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.7.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.7.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src='/media/{{allposts.8.image}}' alt="Tours-png" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                            <div class="card-body">
+                                <div class="features">
+                                    <div class="text">
+                                        <span class="type">Location:</span>
+                                        <span><i class="fa fa-map-marker"></i></span>
+                                        <p>{{allposts.8.location}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Price:</span>
+                                        <span><i class="fa fa-rupee"></i></span>
+                                        <p>{{allposts.8.price}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Duration:</span>
+                                        <span><i class="fa fa-calendar-check-o"></i></span>
+                                        <p>{{allposts.8.duration}}</p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Famous for:</span>
+                                        <span><i class="fa fa-newspaper-o"></i></span>
+                                        <p>{{allposts.8.famous}} </p>
+                                    </div>
+                                    <div class="text">
+                                        <span class="type">Online Payment options:</span>
+                                        <span><i class="fa fa-check-circle-o"></i></span>
+                                        <p>{{allposts.8.payopt}}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4662</span> Bookings</a>
+                                        <a class="btn btn-sm btn-outline-secondary"><span>4</span> Stars</a>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <small class="text-muted"><a href="/dest/{{allposts.8.slug}}">View Details</a></small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -------------------------------------------- -->
+                </div>
+            </div>
+        </div>
+        <section class="container py-2">
+            <div class="row mx-3">
+                <p class="float-start">
+                    <button type="button" class="btn-sm btn-outline-primary">1</button>
+                    <button type="button" class="btn-sm btn-outline-primary">2</button>
+                    <button type="button" class="btn-sm btn-outline-primary">3</button>
+                    <button type="button" class="btn-sm btn-outline-primary">4</button>
+                    <button type="button" class="btn-sm btn-outline-primary">5</button>
+                    <button type="button" class="btn-sm btn-primary">Next</button>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">Back to top</a>
+            </p>
+            <p class="mb-1">&copy; Copyright 2021 | All Rights Reserved</p>
+            <p class="mb-0">Made by <a href="/">tripsy</a> | or read our <a href="#">Blogs</a>.</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
+{% endblock body %}
